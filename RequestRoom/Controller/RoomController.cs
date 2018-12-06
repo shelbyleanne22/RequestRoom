@@ -96,7 +96,8 @@ namespace RequestRoom.Controller
                 string sql = @"UPDATE Room SET roomStatus=@RoomStatus WHERE Id=@RoomId";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue(@"@roomStatus", room.RoomStatus);
+                cmd.Parameters.AddWithValue(@"@RoomStatus", room.RoomStatus);
+                cmd.Parameters.AddWithValue(@"@RoomId", room.RoomId);
 
                 //open database connection
                 conn.Open();

@@ -68,6 +68,7 @@
     <Compile Include="Boundary\BookRoom.Designer.cs">
       <DependentUpon>BookRoom.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controller\LogAttemptController.cs" />
     <Compile Include="Controller\RequestController.cs" />
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="Controller\UserController.cs" />

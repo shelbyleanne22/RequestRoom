@@ -40,7 +40,7 @@ namespace RequestRoom.Boundary
 
         private void btnLogOutBookARoom_Click(object sender, EventArgs e)
         {
-            ConfirmLogout x = new ConfirmLogout(this);
+            ConfirmLogout x = new ConfirmLogout(this, userID);
             x.Show();
         }
 

@@ -17,7 +17,7 @@ namespace RequestRoom.Boundary
     public partial class LogIn : Form
     {
         static string connstring = ConfigurationManager.ConnectionStrings[@"RequestRoom.Properties.Settings.RequestRoomConnectionString"].ConnectionString;
-
+        private Controller.LogAttemptController attC = new Controller.LogAttemptController();
 
         static string ComputeSha256Hash(string rawData)
         {
@@ -75,6 +75,8 @@ namespace RequestRoom.Boundary
             con.Open();
             string userID = txtUsername.Text;
             string password = txtPassword.Text;
+            string passwordHash = ComputeSha256Hash(password);
+
             SqlCommand cmd = new SqlCommand(@"select Id, userID, password, type from [User] where userID='" + txtUsername.Text + @"'and password='" + ComputeSha256Hash(txtPassword.Text) + @"'", con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -87,6 +89,7 @@ namespace RequestRoom.Boundary
                 {
                     int id = loginType.GetInt32(0);
                     string column = loginType.GetString(3);
+                    attC.Insert("Login", id, userID, passwordHash);
 
                     if (column == "Requestor")
                     {
@@ -112,6 +115,7 @@ namespace RequestRoom.Boundary
             }
             else
             {
+                attC.Insert("LoginFail", -1, userID, passwordHash);
                 MessageBox.Show("Invalid Login please check username and password");
             }
         }

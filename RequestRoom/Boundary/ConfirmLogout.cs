@@ -12,9 +12,12 @@ namespace RequestRoom.Boundary
 {
     public partial class ConfirmLogout : Form
     {
+        private Controller.LogAttemptController attC = new Controller.LogAttemptController();
         private Form form = new Form();
-        public ConfirmLogout(Form f)
+        private int userID;
+        public ConfirmLogout(Form f, int identifier)
         {
+            userID = identifier;
             form = f;
             InitializeComponent();
         }
@@ -26,13 +29,13 @@ namespace RequestRoom.Boundary
 
         private void btnLogOutConfirm_Click(object sender, EventArgs e)
         {
-            //Add code that saves logout info here.
-
+            attC.Insert("Logout", userID);
             foreach (Form f in Application.OpenForms)
             {
                 if (f.Name == "LogIn")
                     f.Show();
             }
+            
             form.Close();
             this.Close();
         }

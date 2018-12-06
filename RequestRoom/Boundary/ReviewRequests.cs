@@ -57,7 +57,7 @@ namespace RequestRoom.Boundary
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ConfirmLogout x = new ConfirmLogout(this);
+            ConfirmLogout x = new ConfirmLogout(this, userID);
             x.Show();
         }
 
@@ -78,11 +78,6 @@ namespace RequestRoom.Boundary
             request.RequestId = Convert.ToInt32(DGRequests.SelectedRows[0].Cells[0].Value.ToString());
             reqC.UpdateStatus(request, "Denied");
             updateAvailable();
-        }
-
-        private void btnDenyRequest_Click_1(object sender, EventArgs e)
-        {
-
         }
     }
 }
