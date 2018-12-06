@@ -31,20 +31,10 @@ namespace RequestRoom.Boundary
             //load data in view
             DataTable dt = reqC.Select();
             DGRequests.DataSource = dt;
+            checkAvailable();
         }
 
-        private void ReviewRequests_Load(object sender, EventArgs e)
-        {
-            reqC.Select();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ConfirmLogout x = new ConfirmLogout(this);
-            x.Show();
-        }
-
-        private void DGRequests_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void checkAvailable()
         {
             string x = DGRequests.SelectedRows[0].Cells[3].Value.ToString();
             if (x == "Pending")
@@ -57,18 +47,42 @@ namespace RequestRoom.Boundary
                 this.btnApproveRequest.Enabled = false;
                 this.btnDenyRequest.Enabled = false;
             }
+        }
 
+        private void ReviewRequests_Load(object sender, EventArgs e)
+        {
+            reqC.Select();
+            updateAvailable();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ConfirmLogout x = new ConfirmLogout(this);
+            x.Show();
+        }
+
+        private void DGRequests_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            checkAvailable();
         }
 
         private void btnApproveRequest_Click(object sender, EventArgs e)
         {
+            request.RequestId = Convert.ToInt32(DGRequests.SelectedRows[0].Cells[0].Value.ToString());
             reqC.UpdateStatus(request, "Approved");
+            updateAvailable();
         }
 
         private void btnDenyRequest_Click(object sender, EventArgs e)
         {
+            request.RequestId = Convert.ToInt32(DGRequests.SelectedRows[0].Cells[0].Value.ToString());
             reqC.UpdateStatus(request, "Denied");
+            updateAvailable();
         }
 
+        private void btnDenyRequest_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

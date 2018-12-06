@@ -59,9 +59,9 @@ namespace RequestRoom.Controller
                 cmd.Parameters["@userID"].Value = request.RequestUserId;
                 cmd.Parameters.Add("@roomID", SqlDbType.Int);
                 cmd.Parameters["@roomID"].Value = request.RequestRoomId;
-                cmd.Parameters.Add("@requestStatus", SqlDbType.Int);
+                cmd.Parameters.Add("@requestStatus", SqlDbType.NVarChar);
                 cmd.Parameters["@requestStatus"].Value = request.RequestStatus;
-                cmd.Parameters.Add("@requestDate", SqlDbType.Int);
+                cmd.Parameters.Add("@requestDate", SqlDbType.Date);
                 cmd.Parameters["@requestDate"].Value = request.RequestDate;
 
                 //open connection
@@ -102,7 +102,9 @@ namespace RequestRoom.Controller
                 string sql = @"UPDATE Request SET requestStatus=@RequestStatus WHERE Id=@RequestId";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue(@"@requestStatus", status);
+                cmd.Parameters.AddWithValue(@"@RequestStatus", status);
+                cmd.Parameters.AddWithValue(@"@RequestId", request.RequestId);
+
 
                 //open database connection
                 conn.Open();
