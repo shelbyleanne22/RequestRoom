@@ -69,7 +69,10 @@ namespace RequestRoom.Boundary
         private void btnApproveRequest_Click(object sender, EventArgs e)
         {
             request.RequestId = Convert.ToInt32(DGRequests.SelectedRows[0].Cells[0].Value.ToString());
+            rooms.RoomId = Convert.ToInt32(DGRequests.SelectedRows[0].Cells[2].Value.ToString());
+            rooms.RoomStatus = "Unavailable";
             reqC.UpdateStatus(request, "Approved");
+            roomC.UpdateStatus(rooms);
             updateAvailable();
         }
 

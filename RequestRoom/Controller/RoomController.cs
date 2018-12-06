@@ -83,7 +83,7 @@ namespace RequestRoom.Controller
         }
 
         //method to update data in database from our application
-        public bool UpdateStatus(Rooms room, string status)
+        public bool UpdateStatus(Rooms room)
         {
             //create default return type and set its default to false
             bool isSuccess = false;
