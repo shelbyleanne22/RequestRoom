@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RequestRoom
+namespace RequestRoom.Boundary
 {
     public partial class ConfirmLogout : Form
     {
-        Form form;
+        private Form form = new Form();
         public ConfirmLogout(Form f)
         {
             form = f;
@@ -40,6 +40,11 @@ namespace RequestRoom
         private void btnLogoutCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ConfirmLogout_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

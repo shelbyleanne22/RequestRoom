@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RequestRoom.Entity;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -7,20 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RequestRoom.Classes
+namespace RequestRoom.Controller
 {
-    class User
+    class RoomController
     {
-        public int UserID { get; set; }
-
-        public string Username { get; set; }
-
-        public string Password { get; set; }
-
-        public string Type { get; set; }
-
         static string myconnstrng = ConfigurationManager.ConnectionStrings[@"RequestRoom.Properties.Settings.RequestRoomConnectionString"].ConnectionString;
-
         //selecting Data from database
         public DataTable Select()
         {
@@ -30,7 +22,7 @@ namespace RequestRoom.Classes
             try
             {
                 //SQL Query
-                string sql = @"SELECT * FROM User";
+                string sql = @"SELECT * FROM Room";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 conn.Open();
@@ -49,7 +41,7 @@ namespace RequestRoom.Classes
         }
 
         //Inserting Data into Database
-        public bool Insert(User user)
+        public bool Insert(Rooms room)
         {
             //creating a default return type and setting its value to false
             bool isSuccess = false;
@@ -59,11 +51,12 @@ namespace RequestRoom.Classes
             try
             {
                 //create sql query to insert data
-                string sql = @"INSERT INTO User (userID, password, type) VALUES (@Username, @Password, @Type)";
+                string sql = @"INSERT INTO Room (roomName, roomStatus, roomCapacity, roomDescription ) VALUES (@RoomName, @RoomStatus, @RoomCapacity, @RoomDescription)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue(@"@userID", user.Username);
-                cmd.Parameters.AddWithValue(@"@password", user.Password);
-                cmd.Parameters.AddWithValue(@"@type", user.Type);
+                cmd.Parameters.AddWithValue(@"@roomName", room.RoomName);
+                cmd.Parameters.AddWithValue(@"@roomStatus", room.RoomStatus);
+                cmd.Parameters.AddWithValue(@"@roomCapacity", room.RoomCapacity);
+                cmd.Parameters.AddWithValue(@"@roomDescription", room.RoomDescription);
 
                 //open connection
                 conn.Open();
@@ -90,7 +83,7 @@ namespace RequestRoom.Classes
         }
 
         //method to update data in database from our application
-        public bool Update(User user)
+        public bool UpdateStatus(Rooms room, string status)
         {
             //create default return type and set its default to false
             bool isSuccess = false;
@@ -100,13 +93,10 @@ namespace RequestRoom.Classes
             try
             {
                 //sql to update data in our database
-                string sql = @"UPDATE User SET userID=@Username, password=@Password, type=@Type WHERE Id=@UserID";
+                string sql = @"UPDATE Room SET roomStatus=@RoomStatus WHERE Id=@RoomId";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue(@"@userID", user.Username);
-                cmd.Parameters.AddWithValue(@"@password", user.Password);
-                cmd.Parameters.AddWithValue(@"@type", user.Type);
-                cmd.Parameters.AddWithValue(@"@Id", user.UserID);
+                cmd.Parameters.AddWithValue(@"@roomStatus", room.RoomStatus);
 
                 //open database connection
                 conn.Open();
@@ -134,4 +124,3 @@ namespace RequestRoom.Classes
         }
     }
 }
-

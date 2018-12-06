@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RequestRoom.Controller;
+using RequestRoom.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,13 +10,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RequestRoom
+namespace RequestRoom.Boundary
 {
     public partial class BookRoom : Form
     {
         private int userID;
         private Request request = new Request();
         private Rooms rooms = new Rooms();
+        private RequestController requestC = new RequestController();
+        private RoomController roomsC = new RoomController();
 
         public BookRoom(int user)
         {
@@ -30,7 +34,7 @@ namespace RequestRoom
         private void updateAvailable()
         {
             //load data in view
-            DataTable dt = rooms.Select();
+            DataTable dt = roomsC.Select();
             DGAvailableRooms.DataSource = dt;
         }
 
@@ -61,10 +65,15 @@ namespace RequestRoom
             request.RequestRoomId = x;
             request.RequestStatus = "Pending";
             request.RequestDate = sqldate;
-            request.Insert(request);
+            requestC.Insert(request);
         }
 
         private void DGAvailableRooms_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void BookRoom_Load(object sender, EventArgs e)
         {
 
         }

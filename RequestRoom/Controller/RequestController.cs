@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RequestRoom.Entity;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -6,22 +7,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace RequestRoom
+namespace RequestRoom.Controller
 {
-    class Request
+    class RequestController
     {
-        public int RequestId { get; set; }
-
-        public int RequestUserId { get; set; }
-
-        public int RequestRoomId { get; set; }
-
-        public string RequestStatus { get; set; }
-
-        public string RequestDate { get; set; }
-
         static string myconnstrng = ConfigurationManager.ConnectionStrings[@"RequestRoom.Properties.Settings.RequestRoomConnectionString"].ConnectionString;
 
         //selecting Data from database
@@ -40,7 +30,7 @@ namespace RequestRoom
                 adapter.Fill(dt);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -62,33 +52,44 @@ namespace RequestRoom
             try
             {
                 //create sql query to insert data
-                string sql = @"INSERT INTO [Request] (userID, roomID, requestStatus, requestDate) "
-                    + "VALUES (@userID, " + "@roomID, " + "@requestStatus, " + "@requestDate)";
+                string sql = "INSERT INTO Request (userID, roomID, requestStatus, requestDate) "
+                    + "VALUES (@userID, @roomID, @requestStatus, @requestDate)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue(@"@userID", request.RequestUserId);
-                cmd.Parameters.AddWithValue(@"@roomID", request.RequestRoomId);
-                cmd.Parameters.AddWithValue(@"@requestStatus", request.RequestStatus);
-                cmd.Parameters.AddWithValue(@"@requestDate", request.RequestDate);
+                cmd.Parameters.Add("@userID", SqlDbType.Int);
+                cmd.Parameters["@userID"].Value = request.RequestUserId;
+                cmd.Parameters.Add("@roomID", SqlDbType.Int);
+                cmd.Parameters["@roomID"].Value = request.RequestRoomId;
+                cmd.Parameters.Add("@requestStatus", SqlDbType.Int);
+                cmd.Parameters["@requestStatus"].Value = request.RequestStatus;
+                cmd.Parameters.Add("@requestDate", SqlDbType.Int);
+                cmd.Parameters["@requestDate"].Value = request.RequestDate;
 
                 //open connection
-                cmd.Connection.Open();
+                conn.Open();
                 int rows = cmd.ExecuteNonQuery();
-                cmd.Connection.Close();
                 //if query is successful then the value of rows will be greater than zero; else 0
-                if(rows > 0)
+                if (rows > 0)
                 {
                     isSuccess = true;
+                }
+                else
+                {
+                    isSuccess = false;
                 }
             }
             catch
             {
-                
+
+            }
+            finally
+            {
+                conn.Close();
             }
             return isSuccess;
         }
 
         //method to update data in database from our application
-        public bool Update(Request request)
+        public bool UpdateStatus(Request request, string status)
         {
             //create default return type and set its default to false
             bool isSuccess = false;
@@ -98,21 +99,17 @@ namespace RequestRoom
             try
             {
                 //sql to update data in our database
-                string sql = @"UPDATE Request SET userID=@RequestUserId, roomID=@RequestRoomId, requestStatus=@RequestStatus, requestDate=@RequestDate WHERE Id=@RequestId" ;
+                string sql = @"UPDATE Request SET requestStatus=@RequestStatus WHERE Id=@RequestId";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue(@"@userID", request.RequestUserId);
-                cmd.Parameters.AddWithValue(@"@roomID", request.RequestRoomId);
-                cmd.Parameters.AddWithValue(@"@requestStatus", request.RequestStatus);
-                cmd.Parameters.AddWithValue(@"@requestDate", request.RequestDate);
-                cmd.Parameters.AddWithValue(@"@Id", request.RequestId);
+                cmd.Parameters.AddWithValue(@"@requestStatus", status);
 
                 //open database connection
                 conn.Open();
 
                 int rows = cmd.ExecuteNonQuery();
                 //if the query runs successfully then the value of rows 
-                if(rows>0)
+                if (rows > 0)
                 {
                     isSuccess = true;
                 }

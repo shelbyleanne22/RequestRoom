@@ -62,47 +62,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookRoom.cs">
+    <Compile Include="Boundary\BookRoom.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BookRoom.Designer.cs">
+    <Compile Include="Boundary\BookRoom.Designer.cs">
       <DependentUpon>BookRoom.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\User.cs" />
-    <Compile Include="ConfirmLogout.cs">
+    <Compile Include="Controller\RequestController.cs" />
+    <Compile Include="Controller\RoomController.cs" />
+    <Compile Include="Controller\UserController.cs" />
+    <Compile Include="Entity\User.cs" />
+    <Compile Include="Boundary\ConfirmLogout.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfirmLogout.Designer.cs">
+    <Compile Include="Boundary\ConfirmLogout.Designer.cs">
       <DependentUpon>ConfirmLogout.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogIn.cs">
+    <Compile Include="Boundary\LogIn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogIn.Designer.cs">
+    <Compile Include="Boundary\LogIn.Designer.cs">
       <DependentUpon>LogIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="RequestRoomDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RequestRoomDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="ReviewRequests.cs">
+    <Compile Include="Boundary\ReviewRequests.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReviewRequests.Designer.cs">
+    <Compile Include="Boundary\ReviewRequests.Designer.cs">
       <DependentUpon>ReviewRequests.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Classes\Request.cs" />
-    <Compile Include="Classes\Room.cs" />
-    <EmbeddedResource Include="BookRoom.resx">
+    <Compile Include="Entity\Request.cs" />
+    <Compile Include="Entity\Room.cs" />
+    <EmbeddedResource Include="Boundary\BookRoom.resx">
       <DependentUpon>BookRoom.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConfirmLogout.resx">
+    <EmbeddedResource Include="Boundary\ConfirmLogout.resx">
       <DependentUpon>ConfirmLogout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogIn.resx">
+    <EmbeddedResource Include="Boundary\LogIn.resx">
       <DependentUpon>LogIn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -114,7 +112,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ReviewRequests.resx">
+    <EmbeddedResource Include="Boundary\ReviewRequests.resx">
       <DependentUpon>ReviewRequests.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -126,17 +124,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="RequestRoomDataSet.xsc">
-      <DependentUpon>RequestRoomDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="RequestRoomDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>RequestRoomDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="RequestRoomDataSet.xss">
-      <DependentUpon>RequestRoomDataSet.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

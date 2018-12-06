@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RequestRoom.Entity;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -7,23 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RequestRoom
+namespace RequestRoom.Controller
 {
-    class Rooms
+    class UserController
     {
-        //Properties
-        public int RoomId { get; set; }
-
-        public string RoomName { get; set; }
-
-        public string RoomStatus { get; set; }
-
-        public int RoomCapacity { get; set; }
-
-        public string RoomDescription { get; set; }
-
         static string myconnstrng = ConfigurationManager.ConnectionStrings[@"RequestRoom.Properties.Settings.RequestRoomConnectionString"].ConnectionString;
-
         //selecting Data from database
         public DataTable Select()
         {
@@ -33,7 +22,7 @@ namespace RequestRoom
             try
             {
                 //SQL Query
-                string sql = @"SELECT * FROM Room";
+                string sql = @"SELECT * FROM User";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 conn.Open();
@@ -52,7 +41,7 @@ namespace RequestRoom
         }
 
         //Inserting Data into Database
-        public bool Insert(Rooms room)
+        public bool Insert(User user)
         {
             //creating a default return type and setting its value to false
             bool isSuccess = false;
@@ -62,12 +51,11 @@ namespace RequestRoom
             try
             {
                 //create sql query to insert data
-                string sql = @"INSERT INTO Room (roomName, roomStatus, roomCapacity, roomDescription ) VALUES (@RoomName, @RoomStatus, @RoomCapacity, @RoomDescription)";
+                string sql = @"INSERT INTO User (userID, password, type) VALUES (@Username, @Password, @Type)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue(@"@roomName", room.RoomName);
-                cmd.Parameters.AddWithValue(@"@roomStatus", room.RoomStatus);
-                cmd.Parameters.AddWithValue(@"@roomCapacity", room.RoomCapacity);
-                cmd.Parameters.AddWithValue(@"@roomDescription", room.RoomDescription);
+                cmd.Parameters.AddWithValue(@"@userID", user.Username);
+                cmd.Parameters.AddWithValue(@"@password", user.Password);
+                cmd.Parameters.AddWithValue(@"@type", user.Type);
 
                 //open connection
                 conn.Open();
@@ -94,7 +82,7 @@ namespace RequestRoom
         }
 
         //method to update data in database from our application
-        public bool Update(Rooms room)
+        public bool Update(User user)
         {
             //create default return type and set its default to false
             bool isSuccess = false;
@@ -104,14 +92,13 @@ namespace RequestRoom
             try
             {
                 //sql to update data in our database
-                string sql = @"UPDATE Room SET roomName=@RoomName, roomStatus=@RoomStatus, roomCapacity=@RoomCapacity, roomDescription=@RoomDescription WHERE Id=@RoomId";
+                string sql = @"UPDATE User SET userID=@Username, password=@Password, type=@Type WHERE Id=@UserID";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue(@"@roomName", room.RoomName);
-                cmd.Parameters.AddWithValue(@"@roomStatus", room.RoomStatus);
-                cmd.Parameters.AddWithValue(@"@roomCapacity", room.RoomCapacity);
-                cmd.Parameters.AddWithValue(@"@roomDescription", room.RoomDescription);
-                cmd.Parameters.AddWithValue(@"@Id", room.RoomId);
+                cmd.Parameters.AddWithValue(@"@userID", user.Username);
+                cmd.Parameters.AddWithValue(@"@password", user.Password);
+                cmd.Parameters.AddWithValue(@"@type", user.Type);
+                cmd.Parameters.AddWithValue(@"@Id", user.UserID);
 
                 //open database connection
                 conn.Open();

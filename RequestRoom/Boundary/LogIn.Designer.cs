@@ -1,4 +1,4 @@
-﻿namespace RequestRoom
+﻿namespace RequestRoom.Boundary
 {
     partial class LogIn
     {

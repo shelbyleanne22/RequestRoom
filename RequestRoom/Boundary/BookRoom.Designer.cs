@@ -1,4 +1,4 @@
-﻿namespace RequestRoom
+﻿namespace RequestRoom.Boundary
 {
     partial class BookRoom
     {
@@ -38,10 +38,10 @@
             // 
             // btnLogOutBookARoom
             // 
-            this.btnLogOutBookARoom.Location = new System.Drawing.Point(516, 178);
-            this.btnLogOutBookARoom.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLogOutBookARoom.Location = new System.Drawing.Point(688, 219);
+            this.btnLogOutBookARoom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLogOutBookARoom.Name = "btnLogOutBookARoom";
-            this.btnLogOutBookARoom.Size = new System.Drawing.Size(64, 26);
+            this.btnLogOutBookARoom.Size = new System.Drawing.Size(85, 32);
             this.btnLogOutBookARoom.TabIndex = 5;
             this.btnLogOutBookARoom.Text = "Log Out";
             this.btnLogOutBookARoom.UseVisualStyleBackColor = true;
@@ -59,23 +59,22 @@
             this.DGAvailableRooms.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.DGAvailableRooms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGAvailableRooms.ColumnHeadersVisible = false;
-            this.DGAvailableRooms.Location = new System.Drawing.Point(11, 213);
-            this.DGAvailableRooms.Margin = new System.Windows.Forms.Padding(2);
+            this.DGAvailableRooms.Location = new System.Drawing.Point(15, 262);
+            this.DGAvailableRooms.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DGAvailableRooms.MultiSelect = false;
             this.DGAvailableRooms.Name = "DGAvailableRooms";
             this.DGAvailableRooms.ReadOnly = true;
             this.DGAvailableRooms.RowHeadersVisible = false;
             this.DGAvailableRooms.RowTemplate.Height = 24;
             this.DGAvailableRooms.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGAvailableRooms.Size = new System.Drawing.Size(578, 246);
+            this.DGAvailableRooms.Size = new System.Drawing.Size(771, 303);
             this.DGAvailableRooms.TabIndex = 6;
-            this.DGAvailableRooms.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGAvailableRooms_CellContentClick_1);
             this.DGAvailableRooms.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGAvailableRooms_CellClick);
+            this.DGAvailableRooms.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGAvailableRooms_CellContentClick_1);
             // 
             // calBookRoom
             // 
-            this.calBookRoom.Location = new System.Drawing.Point(188, 42);
-            this.calBookRoom.Margin = new System.Windows.Forms.Padding(7);
+            this.calBookRoom.Location = new System.Drawing.Point(251, 52);
             this.calBookRoom.MaxSelectionCount = 1;
             this.calBookRoom.Name = "calBookRoom";
             this.calBookRoom.TabIndex = 7;
@@ -85,19 +84,18 @@
             // 
             this.lblBookARoom.AutoSize = true;
             this.lblBookARoom.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBookARoom.Location = new System.Drawing.Point(225, 9);
-            this.lblBookARoom.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBookARoom.Location = new System.Drawing.Point(300, 11);
             this.lblBookARoom.Name = "lblBookARoom";
-            this.lblBookARoom.Size = new System.Drawing.Size(148, 26);
+            this.lblBookARoom.Size = new System.Drawing.Size(188, 32);
             this.lblBookARoom.TabIndex = 8;
             this.lblBookARoom.Text = "Book A Room";
             // 
             // btnBookRoom
             // 
-            this.btnBookRoom.Location = new System.Drawing.Point(438, 178);
-            this.btnBookRoom.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBookRoom.Location = new System.Drawing.Point(584, 219);
+            this.btnBookRoom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBookRoom.Name = "btnBookRoom";
-            this.btnBookRoom.Size = new System.Drawing.Size(63, 26);
+            this.btnBookRoom.Size = new System.Drawing.Size(84, 32);
             this.btnBookRoom.TabIndex = 9;
             this.btnBookRoom.Text = "Book";
             this.btnBookRoom.UseVisualStyleBackColor = true;
@@ -105,18 +103,19 @@
             // 
             // BookRoom
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 469);
+            this.ClientSize = new System.Drawing.Size(800, 577);
             this.Controls.Add(this.btnBookRoom);
             this.Controls.Add(this.lblBookARoom);
             this.Controls.Add(this.calBookRoom);
             this.Controls.Add(this.DGAvailableRooms);
             this.Controls.Add(this.btnLogOutBookARoom);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "BookRoom";
             this.Text = "BookRoom";
+            this.Load += new System.EventHandler(this.BookRoom_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGAvailableRooms)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

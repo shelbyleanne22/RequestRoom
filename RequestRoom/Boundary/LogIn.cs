@@ -12,11 +12,12 @@ using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 
-namespace RequestRoom
+namespace RequestRoom.Boundary
 {
     public partial class LogIn : Form
     {
         static string connstring = ConfigurationManager.ConnectionStrings[@"RequestRoom.Properties.Settings.RequestRoomConnectionString"].ConnectionString;
+
 
         static string ComputeSha256Hash(string rawData)
         {
@@ -99,7 +100,7 @@ namespace RequestRoom
                     }
                     else if (column == "Approver")
                     {
-                        ReviewRequests reviewRequest = new ReviewRequests();
+                        ReviewRequests reviewRequest = new ReviewRequests(id);
                         con.Close();
                         reviewRequest.Show();
                         txtUsername.Text = "";
